@@ -66,5 +66,4 @@ public class Professor {
             return false;
         return true;
     }
-
 }
