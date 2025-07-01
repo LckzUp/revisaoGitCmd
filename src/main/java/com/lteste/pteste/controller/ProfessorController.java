@@ -19,5 +19,9 @@ public class ProfessorController {
         return "<h1>Chinelão</h1>";
     }
 
+    @GetMapping( value = "/insert")
+    public String insert() {
+        return "<h1>Tentando Salvar o Professor dos Alunos</h1>";
+    }
 
 }
