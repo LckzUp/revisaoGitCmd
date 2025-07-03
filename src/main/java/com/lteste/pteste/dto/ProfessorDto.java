@@ -1,10 +1,14 @@
 package com.lteste.pteste.dto;
 
+import com.lteste.pteste.modelo.Professor;
+
 public class ProfessorDto {
     
     private String nome;
     private String cpf;
+ 
     
+    //Construtores, 1 Depreciado e 1 Com atributos
     @Deprecated
     public ProfessorDto() {
     }
@@ -13,6 +17,7 @@ public class ProfessorDto {
         this.nome = nome;
         this.cpf = cpf;
     }
+
 
     public String getNome() {
         return nome;
@@ -28,5 +33,11 @@ public class ProfessorDto {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+
+    public Professor novoProfessor(){
+        return new Professor(this.nome, this.cpf);
+
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lteste.pteste.dto.ProfessorDto;
 import com.lteste.pteste.modelo.Professor;
 
 @RestController //Transforma nossa classe em um controller antigamente chamado de Bean
@@ -22,9 +23,9 @@ public class ProfessorController {
     }
 
     @GetMapping( value = "/insert")
-    public String insert() {
+    public String insert(ProfessorDto professorDto) {
 
-        Professor professor = new Professor("Lucas", "957.655.841-52");
+        Professor professor = professorDto.novoProfessor();
         System.out.println(professor.toString());
 
         return "<h1>Tentando Salvar o Professor dos Alunos</h1>";
