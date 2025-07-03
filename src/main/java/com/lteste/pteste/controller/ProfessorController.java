@@ -1,6 +1,7 @@
 package com.lteste.pteste.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,10 +24,12 @@ public class ProfessorController {
     }
 
     @GetMapping( value = "/insert")
-    public String insert(ProfessorDto professorDto) {
+    public String insert(@RequestBody ProfessorDto professorDto) {
 
         Professor professor = professorDto.novoProfessor();
         System.out.println(professor.toString());
+
+        
 
         return "<h1>Tentando Salvar o Professor dos Alunos</h1>";
     }
