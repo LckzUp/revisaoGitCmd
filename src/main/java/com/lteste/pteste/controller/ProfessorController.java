@@ -1,14 +1,21 @@
 package com.lteste.pteste.controller;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriBuilder;
 
 import com.lteste.pteste.dto.ProfessorDto;
 import com.lteste.pteste.modelo.Professor;
 import com.lteste.pteste.repository.ProfessorRepository;
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 @RestController //Transforma nossa classe em um controller antigamente chamado de Bean
 @RequestMapping( value = "/professor") //Mapeando a URL, navegador chama pelo value(valor)
@@ -28,14 +35,17 @@ public class ProfessorController {
         return "<h1>Luquetes</h1>"; //return -> Devolve  o retorno para quem chamou
     }
 
-    @GetMapping( value = "/insert")
-    public String insert(@RequestBody ProfessorDto professorDto) {
+    @PostMapping(value = "/insert")
+    public ResponseEntity<?> insert(@RequestBody ProfessorDto professorDto) {
 
         Professor professor = professorDto.novoProfessor();
+        
+        professorRepository.save(professor);
+        
         System.out.println(professor.toString());
 
-        
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest() .path("/id") .buildAndExpand(professor.getId()) .toUri();
 
-        return "<h1>Tentando Salvar o Professor dos Alunos</h1>";
+        return ResponseEntity.created(uri) .body(professor);
     } 
 }
