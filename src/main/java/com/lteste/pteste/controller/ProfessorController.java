@@ -1,11 +1,15 @@
 package com.lteste.pteste.controller;
 
 import java.net.URI;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +19,8 @@ import com.lteste.pteste.dto.ProfessorDto;
 import com.lteste.pteste.modelo.Professor;
 import com.lteste.pteste.repository.ProfessorRepository;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController //Transforma nossa classe em um controller antigamente chamado de Bean
@@ -40,9 +46,7 @@ public class ProfessorController {
         return professorRepository.findAll();
     }
 
-
-
-    @PostMapping(value = "/insert")
+    @PostMapping(value = "/insert") //inserir dados ao Professor, nome e cpf
     public ResponseEntity<?> insert(@RequestBody ProfessorDto professorDto) {
 
         Professor professor = professorDto.novoProfessor();
@@ -55,4 +59,12 @@ public class ProfessorController {
 
         return ResponseEntity.created(uri) .body(professor);
     } 
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        professorRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+    
+
 }
