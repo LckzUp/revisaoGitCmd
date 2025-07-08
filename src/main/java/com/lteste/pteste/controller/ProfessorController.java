@@ -4,6 +4,7 @@ import java.net.URI;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -66,5 +67,10 @@ public class ProfessorController {
         return ResponseEntity.noContent().build();
     }
     
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Professor> buscarProfessorPorId(@PathVariable Long id){
+        Optional<Professor> professorBanco = professorRepository.findById(id);
+        return ResponseEntity.ok(professorBanco.get());
+    }
 
 }
