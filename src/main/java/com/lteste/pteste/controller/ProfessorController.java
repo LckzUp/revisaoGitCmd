@@ -73,4 +73,9 @@ public class ProfessorController {
         return ResponseEntity.ok(professorBanco.get());
     }
 
+    @GetMapping(value = "/consultarNome/{nome}")
+    public ResponseEntity<Professor> buscarProfessorPorNome(@PathVariable String nome){
+        Professor professorBanco = professorRepository.findByNome(nome);
+        return ResponseEntity.ok(professorBanco);
+    }
 }
