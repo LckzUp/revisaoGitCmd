@@ -6,21 +6,27 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Professor {
+public class Materia {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private String cpf;
+
+
+    private Professor professor;
     
     @Deprecated
-    public Professor() {
+    public Materia() {
     }
 
-    public Professor(String nome, String cpf) {
+    public Materia(String nome) {
         this.nome = nome;
-        this.cpf = cpf;
+    }
+
+    public Materia(String nome, Professor professor) {
+        this.nome = nome;
+        this.professor = professor;
     }
 
 
@@ -38,25 +44,25 @@ public class Professor {
         this.nome = nome;
     }
 
-    public String getCpf() {
-        return cpf;
+    public Professor getProfessor() {
+        return professor;
     }
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
-
+    
 
     @Override
     public String toString() {
-        return "Professor [id=" + id + ", nome=" + nome + ", cpf=" + cpf + "]";
+        return "Materia [id=" + id + ", nome=" + nome + ", professor=" + professor + "]";
     }
-
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+        result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+        result = prime * result + ((professor == null) ? 0 : professor.hashCode());
         return result;
     }
 
@@ -68,12 +74,20 @@ public class Professor {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Professor other = (Professor) obj;
-        if (cpf == null) {
-            if (other.cpf != null)
+        Materia other = (Materia) obj;
+        if (nome == null) {
+            if (other.nome != null)
                 return false;
-        } else if (!cpf.equals(other.cpf))
+        } else if (!nome.equals(other.nome))
+            return false;
+        if (professor == null) {
+            if (other.professor != null)
+                return false;
+        } else if (!professor.equals(other.professor))
             return false;
         return true;
     }
+
+    
+
 }

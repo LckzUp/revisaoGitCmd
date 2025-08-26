@@ -51,13 +51,9 @@ public class ProfessorController {
     public ResponseEntity<?> insert(@RequestBody ProfessorDto professorDto) {
 
         Professor professor = professorDto.novoProfessor();
-        
         professorRepository.save(professor);
-        
         System.out.println(professor.toString());
-
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest() .path("/id") .buildAndExpand(professor.getId()) .toUri();
-
         return ResponseEntity.created(uri) .body(professor);
     } 
 
