@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Materia {
@@ -13,7 +15,8 @@ public class Materia {
     private Long id;
     private String nome;
 
-
+    @ManyToOne
+    @JoinColumn(name = "fk_professor")
     private Professor professor;
     
     @Deprecated
@@ -87,7 +90,4 @@ public class Materia {
             return false;
         return true;
     }
-
-    
-
 }
